@@ -53,7 +53,7 @@ pub fn particle_spawner(
         mut particle_count,
         mut running_state,
         mut burst_index,
-    ) in particle_systems.iter_mut()
+    ) in &mut particle_systems
     {
         if particle_system.use_scaled_time {
             running_state.running_time += time.delta_seconds();
@@ -158,7 +158,8 @@ pub fn particle_spawner(
                             despawn_with_parent: particle_system.despawn_particles_with_system,
                         },
                         velocity: Velocity::new(
-                            direction * particle_system.initial_speed.get_value(&mut rng),
+                            particle_system.initial_velocity
+                                + direction * particle_system.initial_speed.get_value(&mut rng),
                             true,
                         ),
                         distance: DistanceTraveled {

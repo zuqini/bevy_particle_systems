@@ -205,6 +205,9 @@ pub struct ParticleSystem {
     ///
     /// When this is `false` (the default), particles will live out their lifetime even if the system has been despawned.
     pub despawn_particles_with_system: bool,
+
+    /// The initial velocity of all particles, contains direction compared to initial_speed.
+    pub initial_velocity: Vec3,
 }
 
 impl Default for ParticleSystem {
@@ -232,6 +235,7 @@ impl Default for ParticleSystem {
             use_scaled_time: true,
             despawn_on_finish: false,
             despawn_particles_with_system: false,
+            initial_velocity: Vec3::ZERO,
         }
     }
 }
